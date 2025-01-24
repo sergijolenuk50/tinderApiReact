@@ -7,9 +7,9 @@ import './App.css'
 import Layout from './pages/layout';
 import Home from './pages/home';
 import LoginPage from './pages/looginPage';
-import RegisterPage from './pages/rregisterPage';
 import UserProfile from './pages/usserProfile';
 import CreateUser from './pages/CreateUser';
+import RegisterPage from './pages/rregisterPage';
 
 const App: React.FC = () => {
   return (

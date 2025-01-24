@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {APP_ENV} from "../env";
-import axiosInstance from '../axiosInstance';
+
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { APP_ENV } from '../env/index';
 
 const RegisterPage: React.FC = () => {
 
@@ -19,8 +20,10 @@ const RegisterPage: React.FC = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    //APP_ENV
     e.preventDefault();
     try {
+      console.log("env", import.meta.env.VITE_BASE_URL);
       // Відправка POST-запиту безпосередньо через axios
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/register/`, formData);
 
