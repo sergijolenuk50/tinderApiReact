@@ -8,39 +8,95 @@ interface LoginResponse {
   refresh: string;
 }
 
-const LoginPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+  const LoginPage: React.FC = () => {
+    
+    
+    const [formData, setFormData] = useState({
+      // username: '',
+      email: '',
+      password: '',
+    });
 
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
-
+  const navigate = useNavigate(); // Для перенаправлення користувача
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
+    //APP_ENV
     e.preventDefault();
     try {
-      const response = await axios.post<LoginResponse>('/login/', formData); 
+      console.log("env", import.meta.env.VITE_BASE_URL);
+      // Відправка POST-запиту безпосередньо через axios
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/accounts/login/`, formData);
+      
       const { access, refresh } = response.data; 
-
-     
+      
+      
       localStorage.setItem('access', access);
       localStorage.setItem('refresh', refresh);
-
+      
       setMessage('Авторизація успішна!');
       navigate('/profile'); 
     } catch (error) {
       setMessage("Помилка авторизації. Перевірте ім'я користувача та пароль.");
     }
   };
-
+  
   const handleRegisterRedirect = () => {
     navigate('/register'); 
   };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //   const [formData, setFormData] = useState({
+  //     username: '',
+  //     password: '',
+  //   });
+  
+  // const [message, setMessage] = useState('');
+  // const navigate = useNavigate();
+  
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post<LoginResponse>('/login/', formData); 
+  //     const { access, refresh } = response.data; 
+
+     
+  //     localStorage.setItem('access', access);
+  //     localStorage.setItem('refresh', refresh);
+
+  //     setMessage('Авторизація успішна!');
+  //     navigate('/profile'); 
+  //   } catch (error) {
+  //     setMessage("Помилка авторизації. Перевірте ім'я користувача та пароль.");
+  //   }
+  // };
+
+  // const handleRegisterRedirect = () => {
+  //   navigate('/register'); 
+  // };
+
+
+
+
+
+
+
+
 
   return (
     <>

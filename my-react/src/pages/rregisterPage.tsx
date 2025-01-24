@@ -31,7 +31,7 @@ const RegisterPage: React.FC = () => {
 
       // Перенаправлення через 2 секунди на сторінку логіну
       setTimeout(() => {
-        navigate('/login');
+        navigate('/LoginPage');
       }, 2000);
     } catch (error) {
       setMessage('Помилка реєстрації. Перевірте введені дані.');
