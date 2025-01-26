@@ -1,11 +1,60 @@
+// import React, { useState } from 'react';  
+// import { useNavigate } from 'react-router-dom';  
+// import axios from 'axios';  
+// import { isAxiosError } from 'axios';
+
+// const LoginPage: React.FC = () => {  
+//     const [formData, setFormData] = useState({  
+//         email: '',  
+//         password: '',  
+//     });  
+
+//     const [message, setMessage] = useState('');  
+//     const navigate = useNavigate();  
+
+//     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {  
+//         setFormData({ ...formData, [e.target.name]: e.target.value });  
+//     };  
+
+//     const handleSubmit = async (e: React.FormEvent) => {  
+//         e.preventDefault();  
+//         try {  
+//             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/token/`, {  
+//                 email: formData.email,  
+//                 password: formData.password,  
+//             });  
+
+//             const { access, refresh } = response.data;  
+//             localStorage.setItem('access', access);  
+//             localStorage.setItem('refresh', refresh);  
+//             setMessage('Авторизація успішна!');  
+//             navigate('/Home');   
+//         } catch (error) {  
+//             console.error(error); // Логування помилки  
+//             if (isAxiosError(error) && error.response) {  
+//                 setMessage(error.response.data.detail || "Помилка авторизації. Перевірте ім'я користувача та пароль.");  
+//             } else {  
+//                 setMessage("Сталася невідома помилка.");  
+//             }  
+//         }  
+//     };  
+
+//     const handleRegisterRedirect = () => {  
+//         navigate('/register');   
+//     };  
+
+
 import React, { useState } from 'react';
-import axios from '../axiosInstance';
+// import axios from '../axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { Console } from 'console';
+
 
 
 interface LoginResponse {
-  access: string;
-  refresh: string;
+  email: string;
+  password: string;
 }
 
   const LoginPage: React.FC = () => {
@@ -30,16 +79,19 @@ interface LoginResponse {
     try {
       console.log("env", import.meta.env.VITE_BASE_URL);
       // Відправка POST-запиту безпосередньо через axios
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/accounts/login/`, formData);
+      // const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/accounts/login/`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/token/`, formData);
+      console.log("test",response.data);
+      const { email, password } = response.data; 
       
-      const { access, refresh } = response.data; 
       
-      
-      localStorage.setItem('access', access);
-      localStorage.setItem('refresh', refresh);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
       
       setMessage('Авторизація успішна!');
-      navigate('/profile'); 
+      // navigate('/profile'); 
+      navigate('/Home'); 
+
     } catch (error) {
       setMessage("Помилка авторизації. Перевірте ім'я користувача та пароль.");
     }

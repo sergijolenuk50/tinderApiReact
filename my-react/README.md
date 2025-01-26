@@ -79,3 +79,4 @@ npm i @ant-design/icons
 
 
  npm install axios
+ npm install --save-dev @types/axios
