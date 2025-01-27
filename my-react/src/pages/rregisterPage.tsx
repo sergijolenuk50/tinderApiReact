@@ -24,7 +24,8 @@ const RegisterPage: React.FC = () => {
     e.preventDefault();
     try {
       console.log("env", import.meta.env.VITE_BASE_URL);
-      // Відправка POST-запиту безпосередньо через axios
+      // Відправка POST-запиту безпосередньо через 
+      console.log("email",formData);
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/register/`, formData);
 
       setMessage('Реєстрація успішна! Перенаправлення на авторизацію...');

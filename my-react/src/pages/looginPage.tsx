@@ -50,8 +50,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Console } from 'console';
 
-
-
 interface LoginResponse {
   email: string;
   password: string;
@@ -78,6 +76,9 @@ interface LoginResponse {
     e.preventDefault();
     try {
       console.log("env", import.meta.env.VITE_BASE_URL);
+      console.log("email",formData);
+      // console.log("password",formData.password);
+
       // Відправка POST-запиту безпосередньо через axios
       // const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/accounts/login/`, formData);
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/token/`, formData);
@@ -162,9 +163,9 @@ interface LoginResponse {
             <label className="block text-gray-700 font-medium">Ім'я користувача:</label>
             <input
               type="text"
-              name="username"
+              name="email"
               placeholder="Ім'я користувача"
-              value={formData.username}
+              value={formData.email}
               onChange={handleChange}
               required
               className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
