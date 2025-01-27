@@ -83,11 +83,17 @@ interface LoginResponse {
       // const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/accounts/login/`, formData);
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/token/`, formData);
       console.log("test",response.data);
-      const { email, password } = response.data; 
+      console.log("Response:", response);
+      const { access, refresh } = response.data; 
+
+     
+      localStorage.setItem('access', access);
+      localStorage.setItem('refresh', refresh);
+      // const { email, password } = response.data; 
       
       
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
+      // localStorage.setItem('email', email);
+      // localStorage.setItem('password', password);
       
       setMessage('Авторизація успішна!');
       // navigate('/profile'); 
